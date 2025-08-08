@@ -3,3 +3,4 @@ openai
 gunicorn
 dotenv
 flask-cors
+flask-limiter
