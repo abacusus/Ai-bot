@@ -3,3 +3,4 @@ openai
 gunicorn
 cors
 dotenv
+flask_cors
