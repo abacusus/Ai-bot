@@ -21,7 +21,7 @@ limiter = Limiter(
 load_dotenv()
 
 # Configure OpenAI
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("API_KEY")
 if not openai.api_key:
     raise RuntimeError("OPENAI_API_KEY environment variable not set!")
 
