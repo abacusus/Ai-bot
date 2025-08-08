@@ -1,6 +1,5 @@
 flask
 openai
 gunicorn
-cors
 dotenv
-flask_cors
+flask-cors
