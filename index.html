@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat with AI</title>
+  <style>
+    body { font-family: Arial; background: #f9f9f9; margin: 20px; }
+    #chatBox { max-width: 600px; margin: auto; padding: 10px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
+    .message { margin: 10px 0; }
+    .user { color: blue; }
+    .bot { color: green; }
+  </style>
+</head>
+<body>
+  <div id="chatBox">
+    <h2>Talk to GPT</h2>
+    <div id="chat"></div>
+    <input type="text" id="userInput" placeholder="Type your message..." onkeydown="if(event.key==='Enter')sendMessage()">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const inputBox = document.getElementById("userInput");
+      const message = inputBox.value.trim();
+      if (!message) return;
+
+      const chatDiv = document.getElementById("chat");
+      chatDiv.innerHTML += `<div class="message user"><strong>You:</strong> ${message}</div>`;
+      inputBox.value = "";
+
+      const response = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await response.json();
+      chatDiv.innerHTML += `<div class="message bot"><strong>Bot:</strong> ${data.reply}</div>`;
+      chatDiv.scrollTop = chatDiv.scrollHeight;
+    }
+  </script>
+</body>
+</html>
